@@ -20,7 +20,18 @@ jobs:
           echo "Username = ${{ github.actor }}"
           echo "Token set? = ${{ secrets.GITHUB_TOKEN != '' }}"
 
-      - name: Publish to GitHub Packages
+      - name: Configure Maven for GitHub Packages
+        run: |
+          mkdir -p ~/.m2
+          echo "<settings>
+          <servers>
+            <server>
+              <id>github</id>
+              <username>crushed-lemon</username>
+              <password>${{ secrets.GH_PACKAGES_TOKEN }}</password>
+            </server>
+          </servers>
+          </settings>" > ~/.m2/settings.xml
+
+      - name: Build and Deploy
         run: mvn deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
