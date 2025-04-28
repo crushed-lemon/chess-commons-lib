@@ -1,5 +1,7 @@
 package com.crushedlemon.chess.commons.model;
 
+import lombok.Getter;
+
 public enum GameDuration {
 
     ONE_MINUTE (60),
@@ -12,6 +14,7 @@ public enum GameDuration {
     NINETY_MINUTES (60 * 90),
     TWO_HOURS (60 * 120);
 
+    @Getter
     private int durationInSeconds;
 
     GameDuration(int durationInSeconds) {

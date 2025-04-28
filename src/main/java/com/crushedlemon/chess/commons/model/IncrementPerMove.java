@@ -1,5 +1,7 @@
 package com.crushedlemon.chess.commons.model;
 
+import lombok.Getter;
+
 public enum IncrementPerMove {
 
     ONE_SECOND (1),
@@ -9,6 +11,7 @@ public enum IncrementPerMove {
     FIFTEEN_SECONDS (15),
     THIRTY_SECONDS (30);
 
+    @Getter
     int incrementInSeconds;
 
     IncrementPerMove(int incrementInSeconds) {
