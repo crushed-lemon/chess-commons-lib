@@ -15,6 +15,11 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Debug
+        run: |
+          echo "Username = ${{ github.actor }}"
+          echo "Token set? = ${{ secrets.GITHUB_TOKEN != '' }}"
+
       - name: Publish to GitHub Packages
         run: mvn deploy
         env:
