@@ -15,13 +15,9 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Debug
-        run: |
-          echo "Username = ${{ github.actor }}"
-          echo "Token set? = ${{ secrets.GITHUB_TOKEN != '' }}"
-
       - name: Configure Maven settings
         run: |
+          echo "Token set? = ${{ secrets.GH_PKG_PAT != '' }}"
           mkdir -p ~/.m2
           cat > ~/.m2/settings.xml <<EOF
           <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0">
@@ -35,7 +31,7 @@ jobs:
           </settings>
           EOF
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PKG_PAT }}
 
       - name: Build and Deploy
         run: mvn deploy -X
