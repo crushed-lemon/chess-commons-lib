@@ -16,4 +16,10 @@ public class CommonUtils {
     public static Character getCharacterFromPiece(Piece piece) {
         return piece.toString().charAt(0);
     }
+
+    public static int toCoordinate(String position) {
+        int y = position.charAt(0) - 'a' + 1;
+        int x = position.charAt(1) - '0';
+        return ((x - 1) * 8) + (y - 1);
+    }
 }

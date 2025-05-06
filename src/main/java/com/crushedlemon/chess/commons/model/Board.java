@@ -1,14 +1,25 @@
 package com.crushedlemon.chess.commons.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.crushedlemon.chess.commons.utils.CommonUtils.getPieceFromCharacter;
+import static com.crushedlemon.chess.commons.utils.CommonUtils.*;
 
 @AllArgsConstructor
 public class Board {
 
+    @Getter
     private List<Character> pieces;
+
+    Board() {
+        List<Character> pieces = new ArrayList<>();
+        for(int i = 0; i < 64; i++) {
+            pieces.add('X');
+        }
+    }
 
     /**
      * @param position : in modern chess notation eg "a2", "c5"
@@ -35,5 +46,22 @@ public class Board {
     public Piece getPieceAt(Integer y, Integer x) {
         int position = ((x - 1) * 8) + (y -1);
         return getPieceFromCharacter(pieces.get(position));
+    }
+
+    /**
+     * Gets a new board after playing a move. The board adjusts its pieces according to the move.
+     * @param move The move to be played. Note that there are no validations, the move will be made in the board.
+     * @return A modified board with updated pieces.
+     */
+    public Board getNewBoardByPlayingMove(Move move) {
+        Piece movedPiece = move.getMovedPiece();
+        String startingSquare = move.getStartingSquare();
+        String endingSquare = move.getEndingSquare();
+
+        List<Character> newPieces = new ArrayList<>(List.copyOf(this.pieces));
+        newPieces.set(toCoordinate(startingSquare), 'X');
+        newPieces.set(toCoordinate(endingSquare), getCharacterFromPiece(movedPiece));
+
+        return new Board(newPieces);
     }
 }
