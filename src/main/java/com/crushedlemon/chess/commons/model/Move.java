@@ -13,7 +13,7 @@ public class Move {
     Color playerColor;
     String startingSquare;
     String endingSquare;
-    String moveName = "";
+    String moveName;
     Long timestamp;
 
     @JsonPOJOBuilder(withPrefix = "")
