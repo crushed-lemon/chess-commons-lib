@@ -10,4 +10,8 @@ public class Game {
     GameSettings gameSettings;
     String whitePlayerId;
     String blackPlayerId;
+    String whiteConnectionId;
+    String blackConnectionId;
+    GameState gameState;
+    Long startTime;
 }
