@@ -1,14 +1,13 @@
 package com.crushedlemon.chess.commons.model;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.Value;
 
 @Value
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor(force = true)
+@JsonDeserialize(builder = Move.MoveBuilder.class)
 public class Move {
     Piece movedPiece;
     Color playerColor;
@@ -16,4 +15,7 @@ public class Move {
     String endingSquare;
     String moveName = "";
     Long timestamp;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class MoveBuilder {}
 }
