@@ -16,4 +16,5 @@ public class Game {
     Long startTime;
     Board board;
     Integer flags;
+    GameType gameType;
 }
