@@ -14,4 +14,6 @@ public class Game {
     String blackConnectionId;
     GameState gameState;
     Long startTime;
+    Board board;
+    Integer flags;
 }
