@@ -17,4 +17,6 @@ public class Game {
     Board board;
     Integer flags;
     GameType gameType;
+    GameResult gameResult;
+    String winnerId;
 }
