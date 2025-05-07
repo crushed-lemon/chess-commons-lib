@@ -8,17 +8,14 @@ import java.util.List;
 
 import static com.crushedlemon.chess.commons.utils.CommonUtils.*;
 
+@Getter
 @AllArgsConstructor
 public class Board {
 
-    @Getter
-    private List<Character> pieces;
+    private String pieces;
 
     Board() {
-        List<Character> pieces = new ArrayList<>();
-        for(int i = 0; i < 64; i++) {
-            pieces.add('X');
-        }
+        this.pieces = "X".repeat(64);
     }
 
     /**
@@ -45,7 +42,7 @@ public class Board {
      */
     public Piece getPieceAt(Integer y, Integer x) {
         int position = ((x - 1) * 8) + (y -1);
-        return getPieceFromCharacter(pieces.get(position));
+        return getPieceFromCharacter(pieces.charAt(position));
     }
 
     /**
@@ -58,10 +55,10 @@ public class Board {
         String startingSquare = move.getStartingSquare();
         String endingSquare = move.getEndingSquare();
 
-        List<Character> newPieces = new ArrayList<>(List.copyOf(this.pieces));
-        newPieces.set(toCoordinate(startingSquare), 'X');
-        newPieces.set(toCoordinate(endingSquare), getCharacterFromPiece(movedPiece));
+        StringBuilder newPieces = new StringBuilder(this.pieces);
+        newPieces.setCharAt(toCoordinate(startingSquare), 'X');
+        newPieces.setCharAt(toCoordinate(endingSquare), getCharacterFromPiece(movedPiece));
 
-        return new Board(newPieces);
+        return new Board(newPieces.toString());
     }
 }
